@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parichit Sharma — PMM Application · Escape</title>
+<style>
+  :root {
+    --bg-white: #FFFFFF;
+    --bg-light: #F5F5F7;
+    --bg-dark: #1D1D1F;
+    --bg-black: #000000;
+    --text-primary-light: #1D1D1F;
+    --text-secondary-light: #6E6E73;
+    --text-primary-dark: #F5F5F7;
+    --text-secondary-dark: #A1A1A6;
+    --accent-blue: #0071E3;
+    --accent-blue-hover: #0077ED;
+    --accent-navy: #1D3557;
+    --accent-navy-light: #2B5797;
+    --accent-blue-soft: #5E9EFF;
+    --divider-light: rgba(0,0,0,0.1);
+    --divider-dark: rgba(255,255,255,0.1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg-white);
+    color: var(--text-primary-light);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 48px;
+    z-index: 9999;
+    background: rgba(255,255,255,0.72);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    font-size: 14px;
+    color: var(--text-primary-light);
+  }
+  .nav-brand { font-weight: 500; }
+  .nav-brand span { color: var(--accent-blue); font-weight: 400; }
+  .nav-links { display: flex; gap: 24px; }
+  .nav-links a { text-decoration: none; color: var(--text-secondary-light); font-size: 13px; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text-primary-light); }
+
+  /* SECTIONS */
+  section { padding: 100px 24px; }
+  .section-inner { max-width: 980px; margin: 0 auto; }
+
+  .dark-section { background: var(--bg-dark); color: var(--text-primary-dark); }
+  .black-section { background: var(--bg-black); color: var(--text-primary-dark); }
+  .light-section { background: var(--bg-light); color: var(--text-primary-light); }
+  .white-section { background: var(--bg-white); color: var(--text-primary-light); }
+
+  /* EYEBROW */
+  .eyebrow {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .eyebrow-light { color: var(--accent-navy); }
+  .eyebrow-dark { color: #86868B; }
+
+  /* HEADINGS */
+  .section-heading {
+    font-size: 44px;
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .section-subheading {
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.38;
+    text-align: center;
+    margin-bottom: 56px;
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .section-subheading.light { color: var(--text-secondary-light); }
+  .section-subheading.dark { color: var(--text-secondary-dark); }
+
+  .text-blue-dark { color: var(--accent-blue-soft); }
+  .text-blue-light { color: var(--accent-navy-light); }
+
+  /* HERO */
+  #hero {
+    background: #000;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 24px 80px;
+  }
+  #hero .section-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .hero-eyebrow {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #5E9EFF;
+    border: 1px solid rgba(94,158,255,0.35);
+    border-radius: 980px;
+    padding: 8px 20px;
+    display: inline-block;
+    margin-bottom: 28px;
+  }
+  #hero h1 {
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    color: #F5F5F7;
+    max-width: 820px;
+    margin-bottom: 24px;
+  }
+  #hero h1 span { color: var(--accent-blue-soft); }
+  #hero p {
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #A1A1A6;
+    max-width: 580px;
+    margin-bottom: 40px;
+  }
+  .cta-group { display: flex; gap: 16px; align-items: center; justify-content: center; flex-wrap: wrap; }
+  .cta-button {
+    display: inline-block;
+    background: var(--accent-blue);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 980px;
+    font-size: 17px;
+    font-weight: 400;
+    text-decoration: none;
+    transition: background 0.3s ease;
+    cursor: pointer;
+  }
+  .cta-button:hover { background: var(--accent-blue-hover); }
+  .cta-link {
+    display: inline-block;
+    color: var(--accent-blue-soft);
+    font-size: 17px;
+    text-decoration: none;
+  }
+  .cta-link:hover { text-decoration: underline; }
+
+  /* FEATURE GRID */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-top: 0;
+  }
+  .feature-card {
+    border-radius: 18px;
+    padding: 36px 32px;
+    text-align: left;
+  }
+  .feature-card-light { background: #fff; }
+  .feature-card-dark { background: rgba(255,255,255,0.06); }
+
+  .card-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    border-radius: 6px;
+    padding: 4px 10px;
+    margin-bottom: 16px;
+  }
+  .tag-blue { background: rgba(0,113,227,0.12); color: #0071E3; }
+  .tag-green { background: rgba(52,199,89,0.12); color: #28a745; }
+  .tag-orange { background: rgba(255,159,10,0.12); color: #d4820a; }
+  .tag-red { background: rgba(255,59,48,0.12); color: #dc3545; }
+  .tag-purple { background: rgba(175,82,222,0.12); color: #9b59b6; }
+  .tag-blue-soft { background: rgba(94,158,255,0.15); color: #5E9EFF; }
+  .tag-green-soft { background: rgba(52,199,89,0.15); color: #4cd964; }
+  .tag-orange-soft { background: rgba(255,159,10,0.15); color: #ff9f0a; }
+
+  .feature-card h3 {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.24;
+    letter-spacing: -0.005em;
+    margin-bottom: 12px;
+  }
+  .feature-card p {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  .feature-card-light h3 { color: var(--text-primary-light); }
+  .feature-card-light p { color: var(--text-secondary-light); }
+  .feature-card-dark h3 { color: var(--text-primary-dark); }
+  .feature-card-dark p { color: var(--text-secondary-dark); }
+
+  /* FIT GRID */
+  .fit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .fit-card {
+    background: rgba(255,255,255,0.06);
+    border-radius: 18px;
+    padding: 36px 32px;
+  }
+  .fit-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--text-secondary-dark);
+    margin-bottom: 10px;
+  }
+  .fit-card h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-primary-dark);
+    margin-bottom: 10px;
+    letter-spacing: -0.005em;
+  }
+  .fit-card p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text-secondary-dark);
+  }
+  .fit-proof {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent-blue-soft);
+    margin-top: 12px;
+  }
+
+  /* COMPETITOR TABLE */
+  .comp-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0;
+    font-size: 15px;
+  }
+  .comp-table th {
+    text-align: left;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--text-secondary-light);
+    padding: 0 16px 16px 0;
+    border-bottom: 1px solid var(--divider-light);
+  }
+  .comp-table td {
+    padding: 16px 16px 16px 0;
+    border-bottom: 1px solid var(--divider-light);
+    color: var(--text-primary-light);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .comp-table tr:last-child td { border-bottom: none; }
+  .comp-name { font-weight: 600; font-size: 15px; }
+  .comp-escape { color: var(--accent-navy-light); }
+  .comp-gap { font-size: 13px; color: var(--text-secondary-light); margin-top: 4px; }
+
+  /* 90-DAY MOVES */
+  .moves-grid { display: flex; flex-direction: column; gap: 0; }
+  .move-item {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 32px;
+    padding: 40px 0;
+    border-top: 1px solid var(--divider-dark);
+    align-items: start;
+  }
+  .move-number {
+    font-size: 36px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.15);
+    line-height: 1;
+    padding-top: 4px;
+  }
+  .move-content h3 {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text-primary-dark);
+    margin-bottom: 8px;
+    letter-spacing: -0.005em;
+  }
+  .move-insight {
+    font-size: 15px;
+    color: var(--text-secondary-dark);
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+  .move-action {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--accent-blue-soft);
+  }
+
+  /* TIMELINE */
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 32px;
+    padding: 32px 0;
+    border-top: 1px solid var(--divider-light);
+  }
+  .timeline-date {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary-light);
+    padding-top: 4px;
+  }
+  .timeline-content h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-primary-light);
+    margin-bottom: 4px;
+  }
+  .timeline-role {
+    font-size: 14px;
+    color: var(--accent-navy-light);
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  .timeline-content p {
+    font-size: 15px;
+    color: var(--text-secondary-light);
+    line-height: 1.6;
+  }
+
+  /* STAT ROW */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 56px;
+  }
+  .stat-block { text-align: center; }
+  .stat-number {
+    font-size: 48px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-primary-dark);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .stat-number span { color: var(--accent-navy-light); }
+  .stat-label { font-size: 14px; color: var(--text-secondary-dark); line-height: 1.4; }
+
+  /* CONTACT */
+  .contact-strip {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+  }
+  .contact-item {
+    font-size: 15px;
+    color: var(--text-secondary-dark);
+  }
+  .contact-item a { color: var(--accent-blue-soft); text-decoration: none; }
+  .contact-item a:hover { text-decoration: underline; }
+
+  /* RESPONSIVE */
+  @media (max-width: 734px) {
+    #hero h1 { font-size: 34px; }
+    .section-heading { font-size: 28px; }
+    section { padding: 64px 20px; }
+    .feature-grid { grid-template-columns: 1fr; }
+    .fit-grid { grid-template-columns: 1fr; }
+    .comp-table { font-size: 13px; }
+    .timeline-item { grid-template-columns: 1fr; gap: 8px; }
+    .move-item { grid-template-columns: 40px 1fr; gap: 16px; }
+    .stat-row { grid-template-columns: 1fr; gap: 32px; }
+    .nav-links { display: none; }
+  }
+  @media (min-width: 735px) and (max-width: 1068px) {
+    #hero h1 { font-size: 48px; }
+    .section-heading { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">Parichit Sharma · <span>Application for Escape</span></div>
+  <div class="nav-links">
+    <a href="#research">Research</a>
+    <a href="#fit">Fit</a>
+    <a href="#playbook">90-Day Plan</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="section-inner">
+    <div class="hero-eyebrow">Job Application — Product Marketing Manager · Escape · Paris</div>
+    <h1>The first PMM hire<br>needs to ship, not learn<br><span>on the job.</span></h1>
+    <p>I've built PMM from scratch twice — for technical SaaS buyers, in high-growth environments, from a blank page. The experience maps directly to what this role requires.</p>
+    <div class="cta-group">
+      <a href="#" class="cta-button" id="email-btn">Get in Touch</a>
+      <a href="https://linkedin.com/in/parichit" target="_blank" class="cta-link">LinkedIn →</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT I KNOW ABOUT ESCAPE -->
+<section id="research" class="light-section">
+  <div class="section-inner">
+    <span class="eyebrow eyebrow-light">Company Intelligence</span>
+    <h2 class="section-heading">What I know about <span class="text-blue-light">Escape</span></h2>
+    <p class="section-subheading light">Not from the careers page. From studying the product, the funding, and the market.</p>
+
+    <div class="feature-grid">
+      <div class="feature-card feature-card-light">
+        <span class="card-tag tag-blue">Growth Signal</span>
+        <h3>You just closed $18M and need to own the narrative fast</h3>
+        <p>The Series A (Balderton, March 2026) accelerates GTM. You have the proof points — Olympic Games, Miro, PandaDoc — but no dedicated PMM has told that story yet.</p>
+      </div>
+      <div class="feature-card feature-card-light">
+        <span class="card-tag tag-orange">Market Intel</span>
+        <h3>"Offensive security engineering" is a category that needs to be won</h3>
+        <p>Escape isn't just DAST. You're positioning as a full-lifecycle AI platform. That's a meaningful claim — and right now, most buyers still reach for "DAST tool" as their mental shortcut. The PMM job is to change that frame.</p>
+      </div>
+      <div class="feature-card feature-card-light">
+        <span class="card-tag tag-green">Product Insight</span>
+        <h3>The technical moat is real — the sales story hasn't caught up</h3>
+        <p>3,900% coverage improvement over legacy scanners. Agentless API discovery. Proprietary business logic testing. The gap is translating that depth into copy that lands with Security Leaders, not just engineers.</p>
+      </div>
+      <div class="feature-card feature-card-light">
+        <span class="card-tag tag-purple">Team Signal</span>
+        <h3>Founders with deep ML and AppSec backgrounds — rare in this space</h3>
+        <p>Antoine built ML systems at UC Berkeley and worked with the French government on cybersecurity. Tristan comes from data science in Spain and France. Both Forbes 30 Under 30. A PMM who can engage technically with this team will move faster than one who can't.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY I'M BUILT FOR THIS ROLE -->
+<section id="fit" class="dark-section">
+  <div class="section-inner">
+    <span class="eyebrow eyebrow-dark">Candidate Fit</span>
+    <h2 class="section-heading">Why I'm <span class="text-blue-dark">built</span> for this</h2>
+    <p class="section-subheading dark">Five direct matches — each backed by something I've actually shipped.</p>
+
+    <div class="fit-grid">
+      <div class="fit-card">
+        <div class="fit-label">Role need</div>
+        <h3>Establish foundational PMM processes from scratch</h3>
+        <p>Escape is hiring its first dedicated PMM. That means building playbooks, launch templates, and workflows that don't exist yet.</p>
+        <span class="fit-proof">→ Built PMM processes for 4 early-stage B2B SaaS clients at Emergence Software. Cut campaign launch time from 5+ days to under 3.</span>
+      </div>
+      <div class="fit-card">
+        <div class="fit-label">Role need</div>
+        <h3>Own end-to-end GTM for feature launches</h3>
+        <p>New capabilities need to generate traction immediately. The PMM owns positioning, assets, launch plans, and pipeline impact.</p>
+        <span class="fit-proof">→ Owned GTM for 23 technical SaaS feature launches at Upfluence. Drove €160K quarterly revenue growth and 15% improvement in post-sales satisfaction.</span>
+      </div>
+      <div class="fit-card">
+        <div class="fit-label">Role need</div>
+        <h3>Build the full sales enablement toolkit</h3>
+        <p>Pitch decks, battlecards, competitive comparisons, one-pagers — the commercial team needs sharp, resonant material to close faster.</p>
+        <span class="fit-proof">→ Built ABM toolkit for Global Blue targeting Chanel and Prada. Increased target-account engagement by 19%.</span>
+      </div>
+      <div class="fit-card">
+        <div class="fit-label">Role need</div>
+        <h3>Market to security engineers and security leaders simultaneously</h3>
+        <p>Security Leaders care about board-level exposure, compliance risk, and headcount ROI. Engineers care about false positive rates, CI/CD friction, and coverage. The copy needs to speak to each without collapsing them into one generic persona.</p>
+        <span class="fit-proof">→ Translated complex technical features into dual narratives for technical and commercial buyers at Upfluence and Global Blue.</span>
+      </div>
+      <div class="fit-card">
+        <div class="fit-label">Role need</div>
+        <h3>Lead competitive research to sharpen positioning</h3>
+        <p>StackHawk, Bright Security, legacy enterprise vendors — Escape needs a sharp view of where it wins, where it doesn't, and why buyers switch.</p>
+        <span class="fit-proof">→ Led market and competitive research at Upfluence that shaped product roadmap and pricing strategy. Defined ICP targeting at Emergence by analyzing cohort data and competitive landscape.</span>
+      </div>
+      <div class="fit-card">
+        <div class="fit-label">Bonus fit</div>
+        <h3>French-market fluency + international reach</h3>
+        <p>Escape is Paris-based, expanding in the US and Europe. Navigating both markets — culturally and commercially — takes more than French proficiency.</p>
+        <span class="fit-proof">→ Based in France, GEM graduate, worked across EU and APAC markets. Fully authorized to work in France.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPETITIVE LANDSCAPE -->
+<section class="white-section">
+  <div class="section-inner">
+    <span class="eyebrow eyebrow-light">Landscape</span>
+    <h2 class="section-heading">The field Escape<br>is <span class="text-blue-light">competing in</span></h2>
+    <p class="section-subheading light">Where legacy tools fall short — and where Escape's category story needs to land.</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th style="width:160px">Player</th>
+          <th>What they do</th>
+          <th>Where they fall short</th>
+          <th>PMM opportunity for Escape</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="comp-name">StackHawk</span><div class="comp-gap">Developer-first DAST</div></td>
+          <td>CI/CD-native, developer-friendly, good REST/GraphQL support</td>
+          <td>Requires manual OpenAPI spec uploads. No external API discovery. Struggles with shadow APIs in larger organizations.</td>
+          <td>Agentless discovery narrative — Escape finds APIs StackHawk can't see</td>
+        </tr>
+        <tr>
+          <td><span class="comp-name">Bright Security</span><div class="comp-gap">IDE-first DAST</div></td>
+          <td>Zero false-positive claim, IDE integration, early-stage testing</td>
+          <td>Hard to set up, limited shadow API coverage, prioritization is severity-only with no business context</td>
+          <td>Business logic testing angle — Escape tests what Bright misses</td>
+        </tr>
+        <tr>
+          <td><span class="comp-name">Invicti / Acunetix</span><div class="comp-gap">Legacy enterprise DAST</div></td>
+          <td>Enterprise scale, compliance-oriented, broad web app coverage</td>
+          <td>Built for a pre-API, pre-SPA world. Heavy configuration overhead. Slow to adapt to modern stacks.</td>
+          <td>Speed-to-value narrative for engineering-first buyers who won't tolerate legacy overhead</td>
+        </tr>
+        <tr>
+          <td><span class="comp-name comp-escape">Escape</span><div class="comp-gap">Offensive security engineering</div></td>
+          <td>Continuous AI agent-driven discovery, pentesting, and remediation in one platform</td>
+          <td>Category is new — "offensive security engineering" isn't a search term buyers use yet. Brand awareness in the US is still building.</td>
+          <td>The PMM job: make this the phrase buyers reach for first</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 90-DAY PLAYBOOK -->
+<section id="playbook" class="dark-section">
+  <div class="section-inner">
+    <span class="eyebrow eyebrow-dark">90-Day Playbook</span>
+    <h2 class="section-heading">Three moves I'd<br><span class="text-blue-dark">explore first</span></h2>
+    <p class="section-subheading dark">Hypotheses, not promises. Subject to what I learn in week one.</p>
+
+    <div class="moves-grid">
+      <div class="move-item">
+        <div class="move-number">01</div>
+        <div class="move-content">
+          <h3>Audit how buyers actually describe the problem</h3>
+          <p class="move-insight">Before writing a word of positioning, I'd interview 6-8 Escape customers to map their vocabulary — how they described the pain before finding Escape, what convinced them, what language they used internally to justify the buy. The gap between their language and Escape's current messaging is where the category narrative lives.</p>
+          <span class="move-action">Output: Messaging framework anchored in buyer language, not internal product vocabulary</span>
+        </div>
+      </div>
+      <div class="move-item">
+        <div class="move-number">02</div>
+        <div class="move-content">
+          <h3>Build two distinct persona narratives: Security Leader vs. Security Engineer</h3>
+          <p class="move-insight">These audiences have different fears. The engineer cares about false positives, CI/CD friction, and coverage. The leader cares about board-level exposure, compliance risk, and headcount ROI. Escape's product serves both — but the copy needs to speak to each without flattening them into one generic "security team" persona.</p>
+          <span class="move-action">Output: Two persona playbooks feeding into sales decks, battlecards, and ad copy</span>
+        </div>
+      </div>
+      <div class="move-item">
+        <div class="move-number">03</div>
+        <div class="move-content">
+          <h3>Turn the competitor comparison pages into a conversion asset</h3>
+          <p class="move-insight">Escape already publishes head-to-head comparisons with StackHawk, Bright, Invicti, and others. But comparison pages on the blog convert differently than a battlecard a rep can use in a live discovery call. I'd build the bridge between those written comparisons and a sales enablement system reps can actually deploy.</p>
+          <span class="move-action">Output: Competitive battlecard system tied to common objections and displacement scenarios</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRACK RECORD -->
+<section class="light-section">
+  <div class="section-inner">
+    <span class="eyebrow eyebrow-light">Background</span>
+    <h2 class="section-heading">Where these claims<br>come from</h2>
+
+    <div class="stat-row">
+      <div class="stat-block">
+        <div class="stat-number"><span>23</span></div>
+        <div class="stat-label">Technical SaaS feature launches<br>owned end-to-end at Upfluence</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-number"><span>4</span></div>
+        <div class="stat-label">Early-stage B2B SaaS clients<br>built PMM from scratch at Emergence</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-number"><span>+200%</span></div>
+        <div class="stat-label">Qualified monthly engagement growth<br>through ICP targeting and positioning work</div>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">2025 – Present</div>
+        <div class="timeline-content">
+          <h3>Emergence Software</h3>
+          <div class="timeline-role">Product Marketing & GTM Consultant</div>
+          <p>Built PMM processes, playbooks, and launch templates for 4 early-stage B2B SaaS clients. Cut campaign launch time from 5+ days to under 3. Grew qualified monthly engagement from 80 to 240 interactions through category positioning and ICP targeting work that directly shaped product roadmap priorities for 2 portfolio companies.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Feb – May 2025</div>
+        <div class="timeline-content">
+          <h3>Global Blue</h3>
+          <div class="timeline-role">Associate Digital Marketing Manager</div>
+          <p>Executed end-to-end GTM for 30+ enterprise partners across paid, email, and in-product channels. Built ABM sales enablement toolkit targeting Chanel and Prada — increased target-account engagement by 19%. Designed 15 performance dashboards tracking funnel and adoption metrics, improving GTM decision cycles by 21%.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Mar – Oct 2024</div>
+        <div class="timeline-content">
+          <h3>Upfluence</h3>
+          <div class="timeline-role">Associate Product Marketing Manager</div>
+          <p>Owned GTM strategy for 23 technical SaaS feature launches across France and APAC. Built the full sales enablement toolkit — pitch decks, battlecards, competitive comparisons, one-pagers. Led competitive research that shaped roadmap and pricing decisions, contributing to €160K quarterly revenue growth. Turned manual onboarding into automated CRM workflows, reducing churn by 6% without adding headcount.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2019 – 2023</div>
+        <div class="timeline-content">
+          <h3>ARTH</h3>
+          <div class="timeline-role">Product & Growth Marketing Manager</div>
+          <p>Translated regulatory and technical complexity into brand storytelling for a climate-tech B2B. Expanded market reach to 200 sq. km across 9 markets in 11 months. Won the London Business School Real Innovation Award.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Education</div>
+        <div class="timeline-content">
+          <h3>Grenoble École de Management</h3>
+          <div class="timeline-role">MSc Marketing Management · 2022–2025</div>
+          <p>Digital Marketing, SEO, Email Marketing, SEM, Market Intelligence, Brand and Product Communication. GEM carries strong signal in the French market — one reason the network is an active part of my work here.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="contact" class="black-section" style="text-align:center;">
+  <div class="section-inner">
+    <span class="eyebrow eyebrow-dark">Next Step</span>
+    <h2 class="section-heading" style="color:#F5F5F7;">Get in touch</h2>
+    <p class="section-subheading dark" style="margin-bottom:40px;">Happy to connect if you'd like to discuss further. All contact details are below.</p>
+    <div class="cta-group">
+      <a href="#" class="cta-button" id="email-btn-2">Send me a note</a>
+      <a href="https://linkedin.com/in/parichit" target="_blank" class="cta-link">LinkedIn →</a>
+    </div>
+    <div class="contact-strip">
+      <span class="contact-item" id="phone-display">+33 752 983 575</span>
+      <span class="contact-item" id="email-display"></span>
+      <span class="contact-item">Paris, France · Authorized to work in France</span>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Assemble mailto at runtime to avoid Cloudflare obfuscation
+  const user = 'sparichit6';
+  const domain = 'gmail.com';
+  const email = user + '@' + domain;
+  const mailto = 'mailto:' + email + '?subject=PMM%20Role%20%E2%80%94%20Escape';
+
+  document.getElementById('email-btn').href = mailto;
+  document.getElementById('email-btn-2').href = mailto;
+
+  const display = document.getElementById('email-display');
+  if (display) {
+    const link = document.createElement('a');
+    link.href = mailto;
+    link.textContent = email;
+    display.appendChild(link);
+  }
+</script>
+
+</body>
+</html>
